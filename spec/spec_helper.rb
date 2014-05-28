@@ -19,7 +19,7 @@ Warden.test_mode!
 
 RSpec.configure do |config|
   # ## Mock Framework
-  #
+  config.include FactoryGirl::Syntax::Methods
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
   #
   # config.mock_with :mocha

@@ -72,7 +72,7 @@ describe 'deleting posts' do
   context "not user's post" do
     before do
       nico = User.create(email: 'nico@nico.com', password: '12345678', password_confirmation: '12345678')
-      apo  = User.create(email: 'nico@nictutjgjo.com', password: '12345678', password_confirmation: '12345678')
+      apo  = User.create(email: 'nico@nicasdaso.com', password: '12345678', password_confirmation: '12345678')
       Post.create(title: 'my post', description: 'my description', user: apo)
 
       login_as nico
