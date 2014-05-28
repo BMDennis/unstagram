@@ -34,8 +34,4 @@ describe 'creating posts' do
     expect(page).to have_content 'My new post'
     expect(page).to have_css 'img.uploaded-pic'
   end
-
-
-
-
 end
