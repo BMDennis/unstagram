@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.uploaded-pic {
+  max-width: 300px;
+}

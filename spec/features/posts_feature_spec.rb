@@ -11,16 +11,19 @@ require 'spec_helper'
     end
 
     context 'with posts' do
+      before(:each) { Post.create(title: 'Cool post', description: 'Hello world') }
+
       it 'displays the posts' do
         visit '/posts'
 
-        Post.create(title: 'Cool post', description: 'Hello world')
         expect(page).to have_content 'Cool post'
       end
     end
   end
 
   describe 'adding posts' do
+    before(:each) { Post.create(title: 'Cool post', description: 'Hello world') }
+
     it 'adds the post to the homepage' do
       visit '/posts/new'
       fill_in 'Title', with: 'My new post'
@@ -31,7 +34,7 @@ require 'spec_helper'
 
       expect(current_path).to eq posts_path
       expect(page).to have_content 'My new post'
-      expect(page).to have_content 'img.uploaded-pic'
+      expect(page).to have_css 'img.uploaded-pic'
     end
   end
 
