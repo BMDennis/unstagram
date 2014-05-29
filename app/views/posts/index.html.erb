@@ -11,19 +11,20 @@
   <% @posts.each do |post| %>
     <h3><%= post.title %></h3>
     <p><%= post.description %></p>
+
     <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
 
-
+    <% if current_user %>
     <%= link_to("Like", post_likes_path(post), method: :post) %>
-
-    <% post.likes.each do |like| %>
-      <%= like.user.email %> likes this
+      <% post.likes.each do |like| %>
+        <%= like.user.email %> likes this
+      <% end %>
     <% end %>
-
 
     <% if post.user == current_user %>
       <%= link_to("Delete", post_path(post), method: :delete) %>
     <% end %>
+
   <% end %>
 <% end %>
 

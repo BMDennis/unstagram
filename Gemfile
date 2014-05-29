@@ -37,6 +37,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'devise'
 gem 'aws-sdk'
 gem 'factory_girl'
+gem 'bootstrap-sass'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
