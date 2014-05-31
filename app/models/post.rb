@@ -12,17 +12,16 @@ class Post < ActiveRecord::Base
   has_many :likes
   has_and_belongs_to_many :tags
 
-  def tag_names
-    ''
-  end
+  def tag_names; end
 
+  # Creates (if needed) and assigns the given tags to the
+  # current post.
+  #
+  # Also strips all the '#' characters from the provided
+  # tag names.
   def tag_names=(tag_names)
-    return if tag_names.blank?
-    # tags.Tag.find_or_create_by(name: '#' + tag_names)
-    tag_names.split(', ').uniq.each do |tag_name|
-      formatted_name = '#' + tag_name.delete('#')
-      tag = Tag.find_or_create_by(name: formatted_name)
-      tags << tag
+    tag_names.gsub('#', '').split(',').map(&:strip).uniq.each do |tag_name|
+      tags << Tag.find_or_create_by(name: tag_name)
     end
   end
 end
