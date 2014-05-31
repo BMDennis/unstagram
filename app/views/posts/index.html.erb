@@ -13,11 +13,12 @@
     <p><%= post.description %></p>
     <p>
       <% post.tags.each do |tag| %>
-        <%= link_to tag.name, '#' %>
+        <%= link_to tag.formatted_name, '#' %>
       <% end %>
     </p>
 
     <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+
 
     <% if current_user %>
     <%= link_to("Like", post_likes_path(post), method: :post) %>
@@ -25,6 +26,7 @@
         <%= like.user.email %> likes this
       <% end %>
     <% end %>
+    <p><%= alert %></p>
 
     <% if post.user == current_user %>
       <%= link_to("Delete", post_path(post), method: :delete) %>

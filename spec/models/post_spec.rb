@@ -20,14 +20,14 @@ describe Post do
       it 'prepends the tag with a #' do
         post.tag_names = 'yolo'
         tag = post.tags.last
-        expect(tag.name).to eq '#yolo'
+        expect(tag.formatted_name).to eq '#yolo'
       end
 
       it "doesn't add a '#' if there is one" do
         post.tag_names = '#yolo'
         tag = post.tags.last
 
-        expect(tag.name).to eq '#yolo'
+        expect(tag.formatted_name).to eq '#yolo'
       end
 
       it 'comma-separated tags' do
@@ -37,7 +37,7 @@ describe Post do
     end
 
     context 'reuses existing tags' do
-      let!(:tag) { Tag.create(name: '#yolo') }
+      let!(:tag) { Tag.create(name: 'yolo') }
 
       it 'reuses tags if they exist' do
         post.tag_names = 'yolo'
