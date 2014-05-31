@@ -8,8 +8,13 @@ class LikesController < ApplicationController
     @like = @post.likes.new
     @like.user = current_user
 
-
     flash[:alert] = "You cannot like the same post twice" unless @like.save
+    redirect_to posts_path
+  end
+
+  # DELETE /posts/:id/likes
+  def destroy
+    current_user.likes.find(params[:id]).destroy
     redirect_to posts_path
   end
 end
