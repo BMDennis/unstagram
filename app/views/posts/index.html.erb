@@ -21,7 +21,12 @@
 
 
     <% if current_user %>
-    <%= link_to("Like", post_likes_path(post), method: :post) %>
+      <% if (like = post.likes.where(user: current_user).first) %>
+        <%= link_to "Unlike", post_like_path(post, like), method: :delete %>
+      <% else %>
+        <%= link_to "Like", post_likes_path(post), method: :post %>
+      <% end %>
+
       <% post.likes.each do |like| %>
         <%= like.user.email %> likes this
       <% end %>
