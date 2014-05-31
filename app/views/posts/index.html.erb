@@ -13,7 +13,7 @@
     <p><%= post.description %></p>
     <p>
       <% post.tags.each do |tag| %>
-        <%= link_to tag.formatted_name, '#' %>
+        <%= link_to tag.formatted_name, tag %>
       <% end %>
     </p>
 
