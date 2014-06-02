@@ -1,43 +1,59 @@
-<% if user_signed_in? %>
-	<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-<% else %>
-	<%= link_to('Sign in', new_user_session_path) %>
-  <%= link_to('Sign up', new_user_registration_path) %>
-<% end %>
 
 <% if @posts.none? %>
   No posts yet
 <% else %>
-  <% @posts.each do |post| %>
-    <h3><%= post.title %></h3>
-    <p><%= post.description %></p>
-    <p>
-      <% post.tags.each do |tag| %>
-        <%= link_to tag.formatted_name, tag %>
-      <% end %>
-    </p>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= post.title %></h3>
+          </div>
+          <div class="panel-body">
+            <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+            <% if post.user == current_user %>
+              <%= link_to "Delete", post_path(post), method: :delete, class: 'btn btn-lg btn-danger' %>
+            <% end %>
+            <%= link_to "Show More", '#', class: 'btn btn-lg btn-info', data: { toggle: 'modal', target: ".image-modal-#{post.id}" } %>
 
-    <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+            <% post.tags.each do |tag| %>
+              <%= link_to tag.formatted_name, tag %>
+            <% end %>
+
+            <% if (like = post.likes.where(user: current_user).first) %>
+              <%= link_to "Unlike", post_like_path(post, like), method: :delete %>
+            <% else %>
+              <%= link_to "Like", post_likes_path(post), method: :post %>
+            <% end %>
+
+            <% post.likes.each do |like| %>
+              <%= like.user.email %> likes this
+            <% end %>
+          </div>
+        </div>
+
+        <p><%= alert %></p>
+
+      </div>
+
+      <div class="modal fade image-modal-<%= post.id %>">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title"><%= post.title %></h4>
+            </div>
+
+            <div class="modal-body">
+              <%= image_tag post.picture.url, class: 'uploaded-pic' %>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-    <% if current_user %>
-      <% if (like = post.likes.where(user: current_user).first) %>
-        <%= link_to "Unlike", post_like_path(post, like), method: :delete %>
-      <% else %>
-        <%= link_to "Like", post_likes_path(post), method: :post %>
-      <% end %>
-
-      <% post.likes.each do |like| %>
-        <%= like.user.email %> likes this
-      <% end %>
     <% end %>
-    <p><%= alert %></p>
-
-    <% if post.user == current_user %>
-      <%= link_to("Delete", post_path(post), method: :delete) %>
-    <% end %>
-
-  <% end %>
+  </div>
 <% end %>
 
 <%= link_to("New post", new_post_path) %>
