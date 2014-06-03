@@ -1,5 +1,5 @@
 <%= link_to "New post", new_post_path, class: 'btn btn-lg btn-info new-post-btn' %>
-
+No comments yet
 <% if @posts.none? %>
   No posts yet
 <% else %>
@@ -11,7 +11,9 @@
             <h3 class="panel-title"><%= post.title %></h3>
           </div>
           <div class="panel-body">
-            <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+            <% if post.picture.exists? %>
+              <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+            <% end %>
             <% if post.user == current_user %>
               <%= link_to "Delete", post_path(post), method: :delete, class: 'btn btn-lg btn-danger' %>
             <% end %>
@@ -20,25 +22,22 @@
 
               <%= link_to "❤ #{post.likes.count}", post_likes_path(post), class: "btn btn-lg btn-default btn-like" %>
             </p>
-
             <p>
               <% post.tags.each do |tag| %>
                 <%= link_to tag.formatted_name, tag %>
               <% end %>
             </p>
-
-            <!-- <% if (like = post.likes.where(user: current_user).first) %>
-              <%= link_to "Unlike", post_like_path(post, like), method: :delete %>
-            <% else %>
-              <%= link_to "Like", post_likes_path(post), method: :post %>
-            <% end %> -->
-
-          </div>
+          </div> <!-- end of panel-body -->
+          <div id="comments">
+           <%= form_for [post, @comment] do |f| %>
+            <%= f.label :comment %>
+            <%= f.text_area :comment %>
+            <%= f.submit "Add comment" %>
+          <% end %>
         </div>
-
+        </div> <!-- end of panel-default -->
         <p><%= alert %></p>
-      </div>
-
+      </div> <!-- end of col-md-4 -->
       <div class="modal fade image-modal-<%= post.id %>">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -46,15 +45,14 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               <h4 class="modal-title"><%= post.title %></h4>
             </div>
-
             <div class="modal-body">
-              <%= image_tag post.picture.url, class: 'uploaded-pic' %>
+              <% if post.picture.exists? %>
+                <%= image_tag post.picture.url, class: 'uploaded-pic' %>
+              <% end %>
             </div>
           </div>
         </div>
-      </div>
-
-
+      </div> <!-- end of modal -->
     <% end %>
   </div>
 <% end %>

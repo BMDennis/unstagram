@@ -32,6 +32,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'poltergeist'
 end
 
 gem 'paperclip'

@@ -27,7 +27,7 @@ module InstagramMarch
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.to_prepare do
-        Devise::RegistrationsController.layout "registration.html.erb"
+      Devise::RegistrationsController.layout "registration.html.erb"
     end
   end
 end

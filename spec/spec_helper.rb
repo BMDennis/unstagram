@@ -4,8 +4,10 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'database_cleaner'
 
+Capybara.javascript_driver = :poltergeist
 Capybara.server do |app, port|
   require 'rack/handler/thin'
   Rack::Handler::Thin.run(app, :Port => port)
@@ -21,6 +23,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 include Warden::Test::Helpers
 Warden.test_mode!
+AWS.stub!
 
 RSpec.configure do |config|
   # ## Mock Framework

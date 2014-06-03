@@ -9,7 +9,7 @@ $(document).ready(function () {
     $.post(this.href);
   });
 
-  var connection = new WebSocketRails('localhost:3000/websocket');
+  var connection = new WebSocketRails(window.location.host + '/websocket');
   channel = connection.subscribe('likes');
 
   channel.bind('new', function(post) {

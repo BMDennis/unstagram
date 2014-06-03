@@ -24,7 +24,7 @@ end
 describe 'creating posts' do
   context 'logged out' do
     it  'prompts to sign in' do
-      visit '/posts'
+      visit '/'
       click_link 'New post'
 
       expect(page).to have_content 'Sign in'

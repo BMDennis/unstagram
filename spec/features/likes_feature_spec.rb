@@ -6,10 +6,10 @@ describe 'liking posts' do
     login_as create(:user)
   end
 
-  it 'increaments the like count of a post' do
-    visit '/posts'
-    click_on '❤ 0'
-
-    expect(page).to have_link '❤ 1'
+  it 'increaments the like count of a post', js: true do
+    visit "/"
+    sleep 0.1
+    click_on "❤ 0"
+    expect(page).to have_link "❤ 1"
   end
 end
