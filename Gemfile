@@ -35,10 +35,12 @@ group :test, :development do
 end
 
 gem 'paperclip'
+gem 'thin'
+gem 'websocket-rails'
 
 gem 'devise'
 gem 'aws-sdk'
-gem 'factory_girl'
+gem 'factory_girl_rails'
 gem 'bootstrap-sass'
 
 # Use ActiveModel has_secure_password

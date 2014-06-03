@@ -1,37 +1,15 @@
 require 'spec_helper'
 
-describe 'like posts' do
-  context 'on default' do
-    it 'a post has no likes' do
-      visit '/posts'
-
-      expect(page).not_to have_content 'Likes'
-    end
-  end
-
-  context 'with posts' do
-    before(:each) { Post.create(title: 'Cool post', description: 'Hello world') }
-
-    it 'displays the posts' do
-      visit '/posts'
-
-      expect(page).to have_content 'Cool post'
-    end
-  end
-end
-
-describe 'adding likes' do
+describe 'liking posts' do
   before do
-    apo = User.create(email: "apos@apos.com", password: "12345678", password_confirmation: "12345678")
-    Post.create(title: 'my post', description: 'my description')
-    login_as apo
+    create(:post)
+    login_as create(:user)
   end
 
-  it 'can add a like to a post' do
+  it 'increaments the like count of a post' do
     visit '/posts'
-    click_on 'Like'
+    click_on '❤ 0'
 
-    expect(current_path).to eq posts_path
-    expect(page).to have_content 'apos@apos.com likes this'
+    expect(page).to have_link '❤ 1'
   end
 end

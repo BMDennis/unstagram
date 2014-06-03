@@ -1,10 +1,11 @@
+<%= link_to "New post", new_post_path, class: 'btn btn-lg btn-info new-post-btn' %>
 
 <% if @posts.none? %>
   No posts yet
 <% else %>
   <div class="row">
     <% @posts.each do |post| %>
-      <div class="col-md-4">
+      <div class='col-md-4 post' data-id='<%= post.id %>'>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><%= post.title %></h3>
@@ -14,26 +15,28 @@
             <% if post.user == current_user %>
               <%= link_to "Delete", post_path(post), method: :delete, class: 'btn btn-lg btn-danger' %>
             <% end %>
-            <%= link_to "Show More", '#', class: 'btn btn-lg btn-info', data: { toggle: 'modal', target: ".image-modal-#{post.id}" } %>
+            <p>
+              <%= link_to "Show More", '#', class: 'btn btn-lg btn-info', data: { toggle: 'modal', target: ".image-modal-#{post.id}" } %>
 
-            <% post.tags.each do |tag| %>
-              <%= link_to tag.formatted_name, tag %>
-            <% end %>
+              <%= link_to "❤ #{post.likes.count}", post_likes_path(post), class: "btn btn-lg btn-default btn-like" %>
+            </p>
 
-            <% if (like = post.likes.where(user: current_user).first) %>
+            <p>
+              <% post.tags.each do |tag| %>
+                <%= link_to tag.formatted_name, tag %>
+              <% end %>
+            </p>
+
+            <!-- <% if (like = post.likes.where(user: current_user).first) %>
               <%= link_to "Unlike", post_like_path(post, like), method: :delete %>
             <% else %>
               <%= link_to "Like", post_likes_path(post), method: :post %>
-            <% end %>
+            <% end %> -->
 
-            <% post.likes.each do |like| %>
-              <%= like.user.email %> likes this
-            <% end %>
           </div>
         </div>
 
         <p><%= alert %></p>
-
       </div>
 
       <div class="modal fade image-modal-<%= post.id %>">
@@ -56,4 +59,4 @@
   </div>
 <% end %>
 
-<%= link_to("New post", new_post_path) %>
+

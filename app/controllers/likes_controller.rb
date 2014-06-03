@@ -5,8 +5,9 @@ class LikesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @like = @post.likes.new
+    @like = @post.likes.new # or Like.create(post: @post)
     @like.user = current_user
+    WebsocketRails[:likes].trigger 'new', { id: @post.id, new_like_count: @post.likes.count }
 
     flash[:alert] = "You cannot like the same post twice" unless @like.save
     redirect_to posts_path
