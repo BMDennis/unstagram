@@ -29,14 +29,20 @@ No comments yet
             </p>
           </div> <!-- end of panel-body -->
           <div id="comments">
-           <%= form_for [post, @comment] do |f| %>
-            <%= f.label :comment %>
-            <%= f.text_area :comment %>
-            <%= f.submit "Add comment" %>
-          <% end %>
-        </div>
+            <%= form_for [post, @comment] do |f| %>
+              <%= f.label :comment %>
+              <%= f.text_area :comment %>
+              <%= f.submit "Add comment" %>
+            <% end %>
+          </div>
         </div> <!-- end of panel-default -->
         <p><%= alert %></p>
+        <ul class="comments">
+          <% post.comments.each do |comment| %>
+            <li> <%= comment.comment %> from <%= comment.user.email %></li>
+          <% end %>
+        </ul>
+        <%= post.comments.count %>
       </div> <!-- end of col-md-4 -->
       <div class="modal fade image-modal-<%= post.id %>">
         <div class="modal-dialog modal-lg">

@@ -17,12 +17,11 @@ describe 'comments' do
     it "can be added to the post" do
       visit '/'
       # click_on "Leave a comment"
-      puts page.source
       fill_in "Comment", with: "be nice"
       click_on "Add comment"
 
-      expect(page).to have_content "be nice"
-      expect(page).to have_content "1 comment from apo"
+      expect(page).to have_content "be nice from apo@apo.com"
+      expect(page).to have_content "1"
     end
   end
 end
