@@ -101,9 +101,10 @@ describe 'deleting posts' do
       expect(page).to have_content "Map"
     end
 
-    it "doesn't have a map link" do
+    it "doesn't have a map link if there isn't any address" do
       visit '/posts'
-      click_on "Map"
+      click_on "New post"
+      click_on "Post it!"
       expect(page).not_to have_content "Map"
     end
   end
