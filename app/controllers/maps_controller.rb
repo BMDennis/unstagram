@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-  # def show
-    # DO WE NEED THIS??
-  # end
+  def show
+    @post = Post.find(params[:post_id])
+  end
 end
