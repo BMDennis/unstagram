@@ -1,24 +1,3 @@
-<div class="container" data-post-id="<%= @post.id %>">
-  <div id="map"></div>
-  <script>
-    map = new GMaps({
-      div: '#map',
-      lat: 0,
-      lng: 0
-    })
-
-    GMaps.geocode({
-      address: '<%= @post.address %>',
-      callback: function(results, status) {
-        if (status == 'OK') {
-          var latlng = results[0].geometry.location;
-          map.setCenter(latlng.lat(), latlng.lng());
-          map.addMarker({
-            lat: latlng.lat(),
-            lng: latlng.lng()
-          });
-        }
-      }
-    });
-  </script>
+<div class="container" >
+  <div id="map" data-post-id="<%= @post.id %>"></div>
 </div>
