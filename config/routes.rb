@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :posts do
+    resource :map
     resources :likes
     resources :comments
   end

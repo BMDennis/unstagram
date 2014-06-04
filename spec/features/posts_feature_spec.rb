@@ -83,4 +83,28 @@ describe 'deleting posts' do
       expect(page).not_to have_link 'Delete'
     end
   end
+
+  describe "geocode posts" do
+    before do
+      apo  = create(:user)
+      post = create(:post)
+      login_as apo
+    end
+
+    it "has a map link" do
+      visit '/posts'
+      click_on "New post"
+      fill_in "Address", with: "25 City Road, London"
+      click_on "Post it!"
+
+      expect(current_path).to eq "/posts"
+      expect(page).to have_content "Map"
+    end
+
+    it "doesn't have a map link" do
+      visit '/posts'
+      click_on "Map"
+      expect(page).not_to have_content "Map"
+    end
+  end
 end
