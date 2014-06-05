@@ -1,5 +1,5 @@
 <div class="post-new">
-  <%= form_for @post, html: { multipart: true } do |f| %>
+  <%= form_for @post, html: { multipart: true, class: "" } do |f| %>
     <div class="form-group">
       <p>
         <%= f.label :title %>
@@ -15,7 +15,7 @@
       </p>
       <p>
         <%= f.label :picture %>
-        <%= f.file_field :picture, class: "form-control" %>
+        <%= f.file_field :picture, class: "form-control upload-btn" %>
       </p>
       <p>
         <%= f.label :tag_names, 'Tags' %>
