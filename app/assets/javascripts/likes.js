@@ -14,5 +14,4 @@ $(document).ready(function () {
     var postElem = $('.post[data-id=' + post.id + '] .btn-like')
     postElem.text('❤ ' + post.new_like_count);
   });
-
 })

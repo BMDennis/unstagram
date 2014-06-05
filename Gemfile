@@ -28,11 +28,17 @@ group :development do
   gem 'byebug'
 end
 
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'poltergeist'
+end
+
+group :production do
+  gem 'rails_12factor'
+  gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 end
 
 gem 'paperclip'
