@@ -1,5 +1,9 @@
 class Post < ActiveRecord::Base
-  has_attached_file :picture, styles: { medium: '300x300>' },
+  has_attached_file :picture,
+                    styles: {
+                      medium: '300x300>',
+                      thumb: '70x70#'
+                    },
                     storage: :s3,
                     s3_credentials: {
                               bucket: 'instagram_march',

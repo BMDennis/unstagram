@@ -14,7 +14,7 @@ describe 'comments' do
       expect(page).to have_content 'No comments yet'
     end
 
-    it "can be added to the post" do
+    it "can be added to the post", js: true do
       visit '/'
       # click_on "Leave a comment"
       fill_in "Comment", with: "be nice"

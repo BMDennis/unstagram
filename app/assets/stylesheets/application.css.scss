@@ -46,3 +46,17 @@ footer {
   height: 600px;
   margin: auto;
 }
+
+.panel-body img {
+  margin-bottom: 22px;
+}
+
+.comments {
+  margin-right: 37px;
+  margin-top: 12px;
+  height: 200px;
+  overflow: scroll;
+  li {
+    list-style-type: none;
+  }
+}
