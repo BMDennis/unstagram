@@ -33,7 +33,7 @@ git clone git@github.com:apostoiis/unstagram.git
 cd unstagram
 bin/rails s
 ```
-open your browser and go to localhost:3000
+open your browser on localhost:3000
 
 How to test it
 ----
