@@ -36,12 +36,8 @@
       <% else %>
         <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-success navbar-right sign_out" %>
       <% end %>
-
     </div>
   </div> <!-- end of Navbar Fixed Top -->
-
-  <%= notice %>
-  <%= alert %>
 
   <div class="jumbotron">
     <h1>Welcome to Unstagram</h1>
@@ -50,6 +46,11 @@
   <div class="container">
     <%= yield %>
   </div>
+
+  <%= notice %>
+  <%= alert %>
+
+
 
   <footer>
     <p>&copy; Makers</p>
