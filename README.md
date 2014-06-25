@@ -2,7 +2,7 @@
 ====================
 
 We´re creating an Instagram clone based on Ruby on Rails in Week 9 at Makers Academy London.
-![](app/assets/images/logo.png)
+![logo](app/assets/images/logo.png)
 
 Technologies used
 ----
